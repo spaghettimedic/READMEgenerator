@@ -1,11 +1,23 @@
 const generateInstall = installText => {
   if (!installText) {
-    return '';
+    return `
+  ##Table of Contents
+  * [Usage](#usage)
+  * [Contributing](#contributing)
+  * [Deployed Application](#deployed-application)
+    `;
+  } else {
+    return `
+    ##Table of Contents
+    * [Installation](#installation)
+    * [Usage](#usage)
+    * [Contributing](#contributing)
+    * [Deployed Application](#deployed-application)
+  
+    ##Installation
+    ${installText}
+    `;
   }
-  return `
-  ##Installation
-  ${installText}
-  `;
 };
 
 const generateMD = userInput => {
@@ -15,6 +27,15 @@ const generateMD = userInput => {
   ##Description
   ${descriptionInput}
 
-  
-  `
-}
+  ${generateInstall()}
+    
+  ##Usage
+  ${usageInput}
+
+  ##Contributing
+  ${contributeInput}
+
+  ##Deployed Application
+  ${link}
+  `;
+};
