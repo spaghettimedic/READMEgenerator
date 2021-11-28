@@ -20,14 +20,16 @@ const generateInstall = installText => {
   }
 };
 
-const generateMD = userInput => {
+module.exports = templateData => {
+  const { appName, descriptionInput, installInput, usageInput, contributeInput, link } = templateData;
+
   return `
   #${appName}
 
   ##Description
   ${descriptionInput}
 
-  ${generateInstall()}
+  ${generateInstall(installInput)}
     
   ##Usage
   ${usageInput}

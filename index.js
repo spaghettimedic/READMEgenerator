@@ -1,4 +1,6 @@
 const inquirer = require('inquirer');
+const generateMD = require('./src/templateREADME.js');
+const writeFile = require('./utils/generateMD.js');
 
 const promptUser = () => {
   return inquirer.prompt([
@@ -98,4 +100,15 @@ const promptUser = () => {
   ])
 };
 
-promptUser();
+promptUser()
+  .then(userInput => {
+    console.log(userInput);
+    return generateMD(userInput);
+  })
+  .then(pageMD => {
+    console.log(pageMD);
+    return writeFile(pageMD);
+  })
+  .catch(err => {
+    console.log(err);
+  });
