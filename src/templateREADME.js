@@ -15,7 +15,7 @@ const generateLicense = licenseOption => {
   } else {
     return `
 ## License
-This application is under a ${licenseOption} license.
+This application is under ${licenseOption} license.
 `;}
 }
 
@@ -44,26 +44,26 @@ module.exports = (templateData) => {
   }
 
   // if user chose to have a license for their project, insert a bullet for license into Table of Contents and insert badge for that license at top of README.md
-  if (license) {
+  if (license === 'None') {
+    var licenseBullet = ``;
+    var licenseBadge = ``;
+  } else {
     const licenseBadges = [
-      'https://img.shields.io/static/v1?label=License&message=MIT&color=green',
-      'https://img.shields.io/static/v1?label=License&message=Apache&color=blue',
-      'https://img.shields.io/static/v1?label=License&message=GPL&color=red'
+      'https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=for-the-badge',
+      'https://img.shields.io/static/v1?label=License&message=Apache&color=blue&style=for-the-badge',
+      'https://img.shields.io/static/v1?label=License&message=GPL&color=red&style=for-the-badge'
     ];
+
     if (license === 'MIT') {
-      var licenseBadge = `![license badge](${licenseBadges[0]})`
+      var licenseBadge = `an ![license badge](${licenseBadges[0]})`
     } else if (license === 'Apache') {
-      var licenseBadge = `![license badge](${licenseBadges[1]})`
+      var licenseBadge = `an ![license badge](${licenseBadges[1]})`
     } else if (license === 'GPL') {
-      var licenseBadge = `![license badge](${licenseBadges[2]})`
-    } else {
-      var licenseBadge = ``
+      var licenseBadge = `a ![license badge](${licenseBadges[2]})`
     }
 
     var licenseBullet = `
 * [License](#license)`
-  } else {
-    var licenseBullet = ``;
   }
 
   return `# ${appName} ${licenseBadge}

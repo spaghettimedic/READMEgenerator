@@ -143,7 +143,6 @@ promptUser()
     return generateMD(READMEdata);
   })
   .then(pageMD => {
-    console.log('Your README.md file has been generated! Note: a "Tests" section was also created but because of the dynamic nature of tests for different applications, it is blank. Feel free to fill it in with tests of your application, or delete it if desired, before deployment.');
     return writeFile(pageMD);
   })
   .catch(err => {
