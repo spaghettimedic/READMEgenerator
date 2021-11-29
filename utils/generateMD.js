@@ -11,7 +11,8 @@ const writeFile = fileContent => {
         ok: true,
         message: 'README created!'
       });
-      console.log(`Your README.md file has been generated!
+      console.log(`
+Your README.md file has been generated!
 It will appear in the "generatedMD" folder at the root directory of README Generator.
 =====================================================================================
 Note: a "Tests" section was also created but because of the dynamic nature of tests
