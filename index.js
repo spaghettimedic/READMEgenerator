@@ -1,8 +1,13 @@
 const inquirer = require('inquirer');
 const generateMD = require('./src/templateREADME.js');
-const writeFile = require('./utils/generateMD.js');
+const { writeFile } = require('./utils/generateMD.js');
 
-const promptUser = () => {
+const promptUser = READMEdata => {
+  // if there's no 'README' array property, create one
+  if (!READMEdata) {
+    READMEdata = [];
+  }
+
   return inquirer.prompt([
     {
       type: 'input',
