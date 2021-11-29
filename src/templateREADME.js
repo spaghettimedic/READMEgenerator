@@ -15,7 +15,7 @@ const generateLicense = licenseOption => {
   } else {
     return `
 ## License
-This application is under ${licenseOption} license.
+This application is covered under the ${licenseOption} license.
 `;}
 }
 
@@ -55,11 +55,11 @@ module.exports = (templateData) => {
     ];
 
     if (license === 'MIT') {
-      var licenseBadge = `an ![license badge](${licenseBadges[0]})`
+      var licenseBadge = `![license badge](${licenseBadges[0]})`
     } else if (license === 'Apache') {
-      var licenseBadge = `an ![license badge](${licenseBadges[1]})`
+      var licenseBadge = `![license badge](${licenseBadges[1]})`
     } else if (license === 'GPL') {
-      var licenseBadge = `a ![license badge](${licenseBadges[2]})`
+      var licenseBadge = `![license badge](${licenseBadges[2]})`
     }
 
     var licenseBullet = `
