@@ -67,6 +67,13 @@ const promptUser = READMEdata => {
       }
     },
     {
+      type: 'list',
+      name: 'license',
+      message: 'What type of license will your application be under? (Choose one)',
+      choices: ['MIT', 'Apache', 'GPL', 'None'],
+      deafult: 'None'
+    },
+    {
       type: 'confirm',
       name: 'confirmContribute',
       message: 'Would you like to write your own "Contributing" section? (Optional)',
@@ -85,6 +92,32 @@ const promptUser = READMEdata => {
   A brief "Contributing" section will be written for you with a link to the Contributor Covenant.
   ===============================================================================================
           `);
+          return false;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'githubUserName',
+      message: 'Please enter your GitHub user name: (Required)',
+      validate: userNameInput => {
+        if (!userNameInput) {
+          console.log('A GitHub user name is required!');
+          return false;
+        } else {
+          return true;
+        }
+      }
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'Please enter your preferred email address for contact regarding this project: (Required)',
+      validate: emailInput => {
+        if (emailInput) {
+          return true;
+        } else {
+          console.log('You must enter an email address!');
           return false;
         }
       }
@@ -110,7 +143,7 @@ promptUser()
     return generateMD(READMEdata);
   })
   .then(pageMD => {
-    console.log('Your README.md file has been generated!');
+    console.log('Your README.md file has been generated! Note: a "Tests" section was also created but because of the dynamic nature of tests for different applications, it is blank. Feel free to fill it in with tests of your application, or delete it if desired, before deployment.');
     return writeFile(pageMD);
   })
   .catch(err => {

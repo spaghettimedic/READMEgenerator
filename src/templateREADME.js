@@ -1,24 +1,23 @@
 const generateInstall = installText => {
-  if (!installText) {
+  if (installText) {
     return `
-  ## Table of Contents
-  * [Usage](#usage)
-  * [Contributing](#contributing)
-  * [Deployed Application](#deployed-application)
-    `;
+## Installation
+${installText}
+`;
   } else {
-    return `
-  ## Table of Contents
-  * [Installation](#installation)
-  * [Usage](#usage)
-  * [Contributing](#contributing)
-  * [Deployed Application](#deployed-application)
-  
-  ## Installation
-  ${installText}
-    `;
+    return ``;
   }
 };
+
+const generateLicense = licenseOption => {
+  if (licenseOption === 'None') {
+    return ``
+  } else {
+    return `
+## License
+This application is under a ${licenseOption} license.
+`;}
+}
 
 const generateContribute = contributeText => {
   if (!contributeText) {
@@ -28,22 +27,69 @@ const generateContribute = contributeText => {
   }
 };
 
-module.exports = templateData => {
-  const { appName, description, install, usage, contribute, link } = templateData;
+const generateQuestions = (githubUserName, email) => {
+  return `Check out my GitHub profile [here!](https://www.github.com/${githubUserName}) I can be reached directly at ${email} should you have any questions.`;
+};
 
-  return `
-  # ${appName}
+module.exports = (templateData) => {
 
-  ## Description
-  ${description}
-  ${generateInstall(install)}
-  ## Usage
-  ${usage}
+  const { appName, description, install, usage, license, contribute, githubUserName, email, link } = templateData;
 
-  ## Contributing
-  ${generateContribute(contribute)}
+  // if user chose to have an installation section, insert a bullet for installation into Table of Contents
+  if (install) {
+    var installBullet = `
+* [Installation](#installation)`;
+  } else {
+    var installBullet = ``;
+  }
 
-  ## Deployed Application
-  ${link}
-  `;
+  // if user chose to have a license for their project, insert a bullet for license into Table of Contents and insert badge for that license at top of README.md
+  if (license) {
+    const licenseBadges = [
+      'https://img.shields.io/static/v1?label=License&message=MIT&color=green',
+      'https://img.shields.io/static/v1?label=License&message=Apache&color=blue',
+      'https://img.shields.io/static/v1?label=License&message=GPL&color=red'
+    ];
+    if (license === 'MIT') {
+      var licenseBadge = `![license badge](${licenseBadges[0]})`
+    } else if (license === 'Apache') {
+      var licenseBadge = `![license badge](${licenseBadges[1]})`
+    } else if (license === 'GPL') {
+      var licenseBadge = `![license badge](${licenseBadges[2]})`
+    } else {
+      var licenseBadge = ``
+    }
+
+    var licenseBullet = `
+* [License](#license)`
+  } else {
+    var licenseBullet = ``;
+  }
+
+  return `# ${appName} ${licenseBadge}
+
+## Description
+${description}
+
+## Table of Contents${installBullet}
+* [Usage](#usage)${licenseBullet}
+* [Contributing](#contributing)
+* [Tests](#tests)
+* [Questions](#questions)
+* [Deployed Application](#deployed-application)
+${generateInstall(install)}
+## Usage
+${usage}
+${generateLicense(license)}
+## Contributing
+${generateContribute(contribute)}
+
+## Tests
+<!-- Place your tests here -->
+
+## Questions
+${generateQuestions(githubUserName, email)}
+
+## Deployed Application
+${link}`;
 };
