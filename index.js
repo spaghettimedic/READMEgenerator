@@ -106,12 +106,11 @@ const promptUser = READMEdata => {
 };
 
 promptUser()
-  .then(userInput => {
-    console.log(userInput);
-    return generateMD(userInput);
+  .then(READMEdata => {
+    return generateMD(READMEdata);
   })
   .then(pageMD => {
-    console.log(pageMD);
+    console.log('Your README.md file has been generated!');
     return writeFile(pageMD);
   })
   .catch(err => {
