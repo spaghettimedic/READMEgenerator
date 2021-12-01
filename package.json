@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/spaghettimedic/READMEgenerator/issues"
   },
-  "homepage": "https://github.com/spaghettimedic/READMEgenerator#readme"
+  "homepage": "https://github.com/spaghettimedic/READMEgenerator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
 }
